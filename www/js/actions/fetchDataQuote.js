@@ -1,11 +1,12 @@
 import { CALL_API } from '../middleware/api'
-import {operateDataQuote_REQUEST,operateDataQuote_FAILURE,tips_STOP,register_REQUEST,register_FAILURE,tips_START,
+import {operateDataQuote_REQUEST,operateDataQuote_FAILURE,tips_STOP,register_REQUEST,register_FAILURE,tips_START,register_SUCCESS,
 preliminaryContestData_REQUEST, preliminaryContestData_SUCCESS, preliminaryContestData_FAILURE,
 intermediaryContestData_REQUEST, intermediaryContestData_SUCCESS, intermediaryContestData_FAILURE,
 settleMentData_REQUEST, settleMentData_SUCCESS, settleMentData_FAILURE,
 memberInfoData_REQUEST, memberInfoData_SUCCESS, memberInfoData_FAILURE,
 articleListData_REQUEST, articleListData_SUCCESS, articleListData_FAILURE,
-articleDetailData_REQUEST, articleDetailData_SUCCESS, articleDetailData_FAILURE
+articleDetailData_REQUEST, articleDetailData_SUCCESS, articleDetailData_FAILURE,
+memberInfoListData_REQUEST, memberInfoListData_SUCCESS, memberInfoListData_FAILURE
  } from '../constants' 
 
 export function closeTips() {
@@ -76,6 +77,14 @@ export function articleListDataQuote(url,body) {
   }
 }
 
+export function memberInfoList(url,body) {
+  return {
+      endpoint: url,
+      authenticated: true,
+      types: [memberInfoListData_REQUEST, memberInfoListData_SUCCESS, memberInfoListData_FAILURE]
+  }
+}
+
 export function articleDetailDataQuote(url,body) {
   return {
       endpoint: url,
@@ -88,7 +97,7 @@ export function articleDetailDataQuote(url,body) {
 export function registerQuote(url,body) {
   return {
       endpoint: url,
-      types: [register_REQUEST, tips_START, register_FAILURE],
+      types: [register_REQUEST, register_SUCCESS, register_FAILURE],
       body:body,
       time:10000
     }

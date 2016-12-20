@@ -4,7 +4,9 @@ intermediaryContestData_REQUEST, intermediaryContestData_SUCCESS, intermediaryCo
 settleMentData_REQUEST, settleMentData_SUCCESS, settleMentData_FAILURE,
 memberInfoData_REQUEST, memberInfoData_SUCCESS, memberInfoData_FAILURE,
 articleListData_REQUEST, articleListData_SUCCESS, articleListData_FAILURE,
-articleDetailData_REQUEST, articleDetailData_SUCCESS, articleDetailData_FAILURE
+articleDetailData_REQUEST, articleDetailData_SUCCESS, articleDetailData_FAILURE,
+memberInfoListData_REQUEST, memberInfoListData_SUCCESS, memberInfoListData_FAILURE,
+register_REQUEST, register_SUCCESS, register_FAILURE
 } from '../../constants' 
 
 import Assign from 'Object-Assign'
@@ -166,6 +168,30 @@ export function articleListDataQuotes(state = {
     }
 }
 
+export function memberInfoListDataQuotes(state = {
+    isFetching: false,
+    memberInfoListData: 0,
+  }, action) {
+  switch (action.type) {
+    case memberInfoListData_REQUEST:
+      return objectAssign({}, state, {
+        isFetching: true
+      })
+    case memberInfoListData_SUCCESS:
+      return objectAssign({}, state, {
+        isFetching: false,
+        memberInfoListData: action.response,
+        authenticated: action.authenticated || false
+      })
+    case memberInfoListData_FAILURE:
+      return objectAssign({}, state, {
+        isFetching: false
+      })
+    default:
+      return state
+    }
+}
+
 export function articleDetailDataQuotes(state = {
     isFetching: false,
     articleDetailData: 0,
@@ -208,6 +234,29 @@ export function memberInfoDataQuotes(state = {
         authenticated: action.authenticated || false
       })
     case memberInfoData_FAILURE:
+      return objectAssign({}, state, {
+        isFetching: false
+      })
+    default:
+      return state
+    }
+}
+
+export function registerQuotes(state = {
+    isFetching: false,
+    registerResult: 0
+  }, action) {
+  switch (action.type) {
+    case register_REQUEST:
+      return objectAssign({}, state, {
+        isFetching: true
+      })
+    case register_SUCCESS:
+      return objectAssign({}, state, {
+        isFetching: false,
+        registerResult: action.response,
+      })
+    case register_FAILURE:
       return objectAssign({}, state, {
         isFetching: false
       })

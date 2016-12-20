@@ -6,38 +6,14 @@ export default class TableBox extends Component{
 
         state = {
             currentPage:1,
-            // FuturesIDCondition:'',
-            // AccountTypeCondition:'',
-            // HostFuturesNameCondition:'',
-            // FollowFuturesNameCondition:'',
-            // HostAccountCondition:'',
-            // FollowAccountCondition:''
         }    
 
         componentDidUpdate =() =>{
-        //更新搜索条件后页面重新初始化
-            // if ((this.props.FuturesIDCondition != this.state.FuturesIDCondition && this.props.FuturesIDCondition!=undefined)
-            //     || (this.props.AccountTypeCondition != this.state.AccountTypeCondition && this.props.AccountTypeCondition!=undefined)
-            //     || (this.props.HostFuturesNameCondition != this.state.HostFuturesNameCondition  && this.props.HostFuturesNameCondition!=undefined)
-            //     || (this.props.FollowFuturesNameCondition != this.state.FollowFuturesNameCondition  && this.props.FollowFuturesNameCondition!=undefined)
-            //     || (this.props.HostAccountCondition != this.state.HostAccountCondition  && this.props.HostAccountCondition!=undefined)
-            //     || (this.props.FollowAccountCondition != this.state.FollowAccountCondition  && this.props.FollowAccountCondition!=undefined)
-            //     ) {
-            //     this.setState({
-            //         currentPage:1,
-            //         FuturesIDCondition:this.props.FuturesIDCondition,
-            //         AccountTypeCondition:this.props.AccountTypeCondition,
-            //         HostFuturesNameCondition:this.props.HostFuturesNameCondition,
-            //         FollowFuturesNameCondition:this.props.FollowFuturesNameCondition,
-            //         HostAccountCondition:this.props.FollowFuturesNameCondition,
-            //         FollowAccountCondition:this.props.FollowAccountCondition
-            //     })
-            // };
+
         }
 
         componentWillMount =()=>{
-            // if (this.props.data.length) {};
-            // return false
+
         }
 
         pageup = (e)=>{
@@ -104,7 +80,7 @@ export default class TableBox extends Component{
                             array.push(<td key = {j} ><Link to={`/articleDetail/${this.props.data[i].id}`} >{this.props.data[i].title}</Link></td>)
                             continue
                          }
-                         if (this.props.tableHeader[j].key == 'updatedAt') {
+                         if (this.props.tableHeader[j].key == 'updatedAt' || this.props.tableHeader[j].key == 'reg_time' ) {
                             array.push(<td key = {j} >{ this.props.data[i][this.props.tableHeader[j].key].substr(0,10)}</td>)
                             continue
                          }

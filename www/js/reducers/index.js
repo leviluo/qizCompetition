@@ -1,6 +1,6 @@
 import auth from './modules/auth';
-import {Tips,operateDatas,intermediaryContestDataQuotes,preliminaryContestDataQuotes,
-memberInfoDataQuotes,settleMentDataQuotes,articleListDataQuotes,articleDetailDataQuotes
+import {Tips,operateDatas,intermediaryContestDataQuotes,preliminaryContestDataQuotes,memberInfoListDataQuotes,
+memberInfoDataQuotes,settleMentDataQuotes,articleListDataQuotes,articleDetailDataQuotes,registerQuotes
 } from './modules/fetchSecretQuote';
 
 import { combineReducers } from 'redux'
@@ -11,6 +11,7 @@ const quotesApp = combineReducers({
   reduxAsyncConnect,
   Tips,
   operateDatas,
+  memberInfoListDataQuotes,registerQuotes,
   preliminaryContestDataQuotes,
   intermediaryContestDataQuotes,
   memberInfoDataQuotes,settleMentDataQuotes,

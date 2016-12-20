@@ -24,6 +24,7 @@ alter table referrer modify referrerid varchar(20) DEFAULT '';
 alter table referrer modify recommendedid varchar(20) DEFAULT '';
 alter table referrer_request modify userid varchar(20) default '';
 
+
 -- CREATE TABLE `degree` (  
 --   `degreeID` mediumint(8) unsigned auto_increment,
 --   `degree` char(10) DEFAULT '', 

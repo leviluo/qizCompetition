@@ -6,10 +6,11 @@ import RadioBox from './components/RadioBox'
 import ModalBox from './components/Modal'
 import Confirms from './components/Confirms'
 import CheckTableBox from './components/CheckTableBox'
+import TableBox from './components/TableBox'
 import Tip from './components/Tip'
 import {connect} from 'react-redux';
-import { openTips,operateDataQuote,articleListDataQuote,articleDetailDataQuote} from '../actions/fetchDataQuote';
-import {asyncConnect} from 'redux-async-connect'
+import { openTips,operateDataQuote,articleListDataQuote,articleDetailDataQuote,memberInfoList} from '../actions/fetchDataQuote';
+// import {asyncConnect} from 'redux-async-connect'
 
 const items = document.getElementsByName('ulNav');
 const radioItems = [{id:0,value:'公告'},{id:1,value:'规则'}]
@@ -25,24 +26,30 @@ const preliminaryEliminatedHeader = [
 {key:"days",value:"持续天数",width:"20%"}
 ]
 
-@asyncConnect([{
-  promise: ({store: {dispatch, getState}}) => {
-    const promises = [];
-
-    if (!getState().articleListDataQuotes.isloaded) {
-      promises.push(dispatch(articleListDataQuote('public/articleListData')));
-    }
-
-    return Promise.all(promises);
-  }
-}])
+const memberInfoHeader = [
+    {key:"id",value:"编号"},
+    {key:"userid",value:"账户"},
+    {key:"name",value:"姓名"},
+    {key:"identitycard",value:"身份证"},
+    {key:"reg_time",value:"注册时间"}
+]
+// @asyncConnect([{
+//   promise: ({store: {dispatch, getState}}) => {
+//     const promises = [];
+//     if (!getState().articleListDataQuotes.isloaded) {
+//       promises.push(dispatch(articleListDataQuote('public/articleListData')));
+//     }
+//     return Promise.all(promises);
+//   }
+// }])
 @connect(
   state => ({
     Tips:state.Tips,
     articleListData:state.articleListDataQuotes.articleListData,
+    memberInfoListData:state.memberInfoListDataQuotes.memberInfoListData,
     articleDetailData:state.articleDetailDataQuotes.articleDetailData
     }),
-  {openTips,operateDataQuote,articleDetailDataQuote}
+  {openTips,operateDataQuote,articleDetailDataQuote,articleListDataQuote,memberInfoList}
 )
 
 export default class memberCenter extends Component{
@@ -60,6 +67,11 @@ export default class memberCenter extends Component{
             this.setState({
                 view:target
             });
+            if (target=="articleManage") {
+                if(!this.props.articleListData)this.props.articleListDataQuote('public/articleListData')
+            } else if (target == "memberManage") {
+                if(!this.props.memberInfoListData)this.props.memberInfoList('admin/memberInfoList')
+            };
             
             for (var i = 0; i < items.length; i++) {
                 items[i].style.background = 'none'
@@ -230,6 +242,7 @@ export default class memberCenter extends Component{
         }
 
           render() {
+            console.log(this.props.memberInfoListData)
             const styles = require('./adminCenter.scss')
             // const items =[
             //     {account:"1111",profits:"100",days:"5"},
@@ -294,7 +307,8 @@ export default class memberCenter extends Component{
             <button className="btn btn-primary" onClick={(e)=>this.setDegree(e,0)}>复赛降级</button>
             </div>}
             {this.state.view=='memberManage' && <div>
-            会员管理
+                <TableBox tableHeader = { memberInfoHeader }
+                  data = { this.props.memberInfoListData } />
             </div>}
             <ModalBox open = { this.state.open }
             content = { this.state.content }

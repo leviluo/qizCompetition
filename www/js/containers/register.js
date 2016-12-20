@@ -3,17 +3,21 @@ import React, { Component, PropTypes } from 'react'
 import { openTips } from '../actions/fetchDataQuote'
 import { connect } from 'react-redux'
 import InputBox from './components/InputBox'
+import Confirms from './components/Confirms'
 import TextareaBox from './components/TextareaBox'
 import { registerQuote } from '../actions/fetchDataQuote';
+import { loginUser } from '../actions/auth'
 
 @connect(
     state => ({
-        Tips: state.Tips,
-    }), { registerQuote, openTips }
+        registerResult: state.registerQuotes.registerResult,
+    }), { registerQuote, openTips,loginUser  }
 )
 export default class Register extends Component {
   state = {
-    referrer:''
+    referrer:'',
+    openConfirms:false,
+    time:10
   }
 
  phoneChange = (e)=>{
@@ -53,7 +57,7 @@ export default class Register extends Component {
   }
 
   handleClick =()=>{
-    if (!this.state.phone) {
+        if (!this.state.phone) {
             this.props.openTips('未填写手机号')
             return;
         }
@@ -69,10 +73,7 @@ export default class Register extends Component {
             this.props.openTips('未填写密码')
             return;
         }
-        // if (!this.state.nickName) {
-        //     this.props.openTips('未填写昵称')
-        //     return;
-        // }
+
         if (!this.state.name) {
             this.props.openTips('没有填写姓名')
             return;
@@ -181,7 +182,50 @@ export default class Register extends Component {
     return false;
   }
 
+  componentWillReceiveProps=(nextProps)=>{
+    if (nextProps.registerResult.id==0) {
+
+      this.setState({
+        openConfirms:this.state.openConfirms ? false :true,
+        ConfirmText:nextProps.registerResult.msg+this.state.time+"S后自动跳转个人中心,也可以确认立即跳转"
+      })
+      var _this = this
+      this.setIntrl = setTimeout(function(){
+        _this.confirm()
+      },10000)
+      this.setIntrl1 = setInterval(function(){
+        console.log(_this.state.time)
+        if (_this.state.time<0) {clearInterval(this.setIntrl1)};
+        _this.setState({
+          time:_this.state.time - 1,
+        })
+      },1000)
+    }else{
+      this.setState({
+        openConfirms:this.state.openConfirms ? false :true,
+        ConfirmText:nextProps.registerResult.message || nextProps.registerResult.msg
+      })
+    }
+  }
+
+  confirm = ()=>{
+    console.log(this.state.openConfirms)
+    this.setState({
+      openConfirms:false
+    })
+    if (this.props.registerResult.id!=0)return;
+    const creds = { operid: this.state.phone, password: this.state.password }
+    this.props.loginUser(creds)
+  }
+
+  componentWillUnmount =()=>{
+     clearTimeout(this.setIntrl)
+     clearInterval(this.setIntrl1)
+  }
+
   render() {
+    // this.props.registerResult
+    console.log("what")
     return (
             <div style={{background:"white"}}>
            <form style={{width:"600px",margin:"10px auto",padding:"30px 0"}}>
@@ -231,6 +275,7 @@ export default class Register extends Component {
           提交
         </button>
             </form>
+           <Confirms confirm={this.confirm} ConfirmText={this.state.ConfirmText} open = {this.state.openConfirms} />
       </div>
     )
   } 

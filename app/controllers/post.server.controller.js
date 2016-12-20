@@ -354,5 +354,21 @@ module.exports = {
                 res.json(docs)
             }
         })
+    },
+
+    memberInfoList:function(req,res,next){
+        req.models.userinfo.find({ sort: 'id ASC'}).populate('userid').exec(function(err, docs) {
+            if (err) { next(err) };
+            if (docs) {
+                docs.map(function(item,index){
+                    var userid = item.userid.userid
+                    var reg_time = item.userid.reg_time
+                    item.userid = userid
+                    item.reg_time = reg_time
+                })
+            
+                res.json(docs)
+            }
+        })
     }
 }

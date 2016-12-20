@@ -14,6 +14,7 @@ module.exports = function(app){
 	app.route('/admin/Article').post(postController.ensureAdminAuthorized,postController.Article)
 	app.route('/admin/deleteArticle').post(postController.ensureAdminAuthorized,postController.deleteArticle)
 	app.route('/admin/setDegree').post(postController.ensureAdminAuthorized,postController.setDegree)
+	app.route('/admin/memberInfoList').get(postController.ensureAdminAuthorized,postController.memberInfoList)
 	app.get('/download',function(req,res,next){
 	  var fileurl = path.resolve(__dirname, '../downloads/'+req.query.file)
 	  res.download(fileurl,req.query.file);
@@ -22,4 +23,3 @@ module.exports = function(app){
 	  response.sendFile(path.resolve(__dirname, '../../www/', 'index.html'))
 	})
 }
-

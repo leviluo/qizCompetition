@@ -34,8 +34,13 @@ export const articleDetailData_REQUEST = 'articleDetailData_REQUEST'
 export const articleDetailData_SUCCESS = 'articleDetailData_SUCCESS'
 export const articleDetailData_FAILURE = 'articleDetailData_FAILURE'
 
+export const memberInfoListData_REQUEST = 'memberInfoListData_REQUEST'
+export const memberInfoListData_SUCCESS = 'memberInfoListData_SUCCESS'
+export const memberInfoListData_FAILURE = 'memberInfoListData_FAILURE'
+
 export const register_REQUEST = 'register_REQUEST'
 export const register_FAILURE = 'register_FAILURE'
+export const register_SUCCESS = 'register_SUCCESS'
 
 
 
