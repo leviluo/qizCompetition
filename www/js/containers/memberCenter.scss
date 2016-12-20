@@ -1,0 +1,56 @@
+
+.rightul{
+	float:left;
+	width:20%;
+	padding-left:0;
+
+}
+.rightul li{
+	list-style-type:none;
+	text-align:center;
+	font-size:15px;
+}
+.rightul li a{
+	color:#333;
+	height:40px;
+	line-height:40px;
+	display:block;
+	cursor:pointer;
+	font-size:16px;
+}
+.rightul li a:hover{
+	background:white !important;
+	color:#1874CD !important;
+	text-decoration:none;
+	font-size:18px;
+	border-left:2px solid #1874CD
+}
+
+.rightul>li:first-of-type a{
+	background:white;
+	border-left:2px solid #1874CD;
+	color:#1874CD
+}
+
+.divright{
+	float:right;
+	width:80%;
+	padding:20px;
+	background:white
+}
+.divright tr{
+	height:50px;
+	line-height:50px
+}
+
+.divright table tbody tr:hover{
+	color:#1E90FF !important;
+	cursor:pointer;
+	vertical-align:middle
+}
+
+.divright table tbody tr td:nth-child(2){
+	text-align:left
+}
+
+

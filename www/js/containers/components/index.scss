@@ -1,0 +1,50 @@
+.modalfooteradd {
+    padding:0;
+    height:45px;
+    text-align:center !important;
+    padding:0 !important;;
+}
+.modalfooteradd a { 
+    display: block;
+    width: 50%;
+    height: 44px;
+    line-height: 44px;
+    font-size: 16px;
+    float: left;
+    cursor: pointer;
+}
+
+.modalfooteradd a:hover{
+text-decoration: none
+}
+
+.pagedown{
+   float:right;
+}
+
+.pagedown li{
+    list-style-type: none;
+    float: left;
+}
+
+.pagedown li>a{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    text-align: center;
+    margin-left: 5px;
+    color:#436EEE;
+    text-decoration:none;
+    cursor:pointer;
+    background: #ccc;
+}
+
+.pagedown li>a:hover{
+   background: #436EEE; 
+   color:white
+}
+
+.pagedown button {
+    margin-left: 5px
+}

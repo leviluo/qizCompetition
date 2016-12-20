@@ -1,0 +1,121 @@
+.toolBar{
+	padding:5px;
+	background:#ccc;
+	position:relative;
+}
+
+.toolBar button{
+	height:28px
+}
+
+.toolBar button span{
+	display:none;
+	position:absolute;
+	background:black;
+	color:white;
+	padding:5px;
+	top:-22px;
+	left:0;
+	z-index:10;
+	font-size:14px !important;
+	height:22px;
+	line-height:12px;
+	font-family:'黑体' !important
+}
+.inputdiv{
+	width:41px;
+	height:28px;
+	overflow:hidden
+}
+.inputdiv input[type="file"]{
+	opacity:0;
+    filter:alpha(opacity=0);
+    height: 28px !important;
+    width: 41px !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+} 
+
+.fontsize {
+	width:190px;
+	font-size:12px;
+	background:#eee;
+	border:1px solid #999;
+	padding:0;
+	position:absolute;
+	left:5px;
+	padding-bottom:4px;
+	top:32.5px;
+}
+.fontsize button {
+	border:1px solid #999;
+	background:#fff;
+	display:block;
+	padding:2px;
+	float:left;
+	width:32px;
+	margin:4px 0 0 4px;
+}
+.fontFamily {
+	width:200px;
+	font-size:12px;
+	background:#eee;
+	border:1px solid #999;
+	padding:0;
+	position:absolute;
+	left:5px;
+	padding-bottom:4px;
+	top:32.5px;
+}
+.fontFamily button {
+	border:1px solid #999;
+	background:#fff;
+	display:block;
+	padding:2px;
+	float:left;
+	margin:4px 0 0 4px;
+}
+
+.color {
+	width:150px;
+	height:150px;
+	font-size:12px;
+	background:#eee;
+	border:1px solid #999;
+	padding:0;
+	position:absolute;
+	left:84px;
+	top:32.5px;
+}
+.color button {
+	border:1px solid #999;
+	display:block;
+	width:12px;
+	height:12px;
+	float:left;
+	margin:4px 0 0 4px;
+}
+.color em {
+	display:block;
+	height:28px;
+	width:80%;	
+	clear:both;
+}
+.color em input {
+	margin-top:10px;
+	margin-left:4px;
+	width:136px;	
+	height:30px;
+	cursor:pointer;
+	background:#fff;
+}
+.content{
+	width:100%;
+	padding:5px;
+	background:white;
+	height:300px;
+	overflow:auto;
+	border:1px solid #ccc;
+}

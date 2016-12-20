@@ -1,0 +1,28 @@
+body{
+	font-family: "黑体", Helvetica, Arial, "Microsoft Yahei UI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+    background-color: #efefef;
+    overflow-y: scroll;
+}
+
+table{
+	font-size:1em;
+	padding:2px;
+}
+
+thead{
+	background-color:#efefef;
+}
+
+th,td{
+	text-align: center;
+	vertical-align:middle !important;
+}
+
+nav .myactive{
+	background:#ccc !important;
+	color:#666 !important;
+};
+
+.modal-content{
+border-radius: none !important
+}
