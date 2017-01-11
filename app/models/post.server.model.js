@@ -7,9 +7,6 @@ var user = waterline.Collection.extend({
   autoCreatedAt: false,
   autoUpdatedAt: false,
   attributes: {
-        userinfo: {
-            collection: "userinfo",
-        },
         userid: {
             type: 'string',
             required: true
@@ -76,8 +73,8 @@ var userInfo = waterline.Collection.extend({
   autoUpdatedAt: false,
   attributes: {
         userid: {
-            model: 'user',
-            var:"userinfo"
+          type: 'integer',
+          required: true
         },
         identitycard: {
             type: 'string',
@@ -85,7 +82,6 @@ var userInfo = waterline.Collection.extend({
         },
         name: {
             type: 'string',
-            // required: true
         },
    }
 }

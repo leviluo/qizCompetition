@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import LoginRegister from './LoginRegister'
 import Logout from './components/Logout'
 import Tip from './components/Tip'
 // import {isIE} from './utils/browerType'
@@ -49,10 +48,13 @@ export default class Index extends Component {
             < div > 
             {!isAuthenticated &&
                 < div className = 'navbar-form pull-right' >
-                < LoginRegister
-                id = {this.props.params.id}
-                openTips = { this.props.openTips }
-                /> < /div>
+                <Link to="/login" className="btn btn-primary">
+                  登录
+                </Link>&nbsp;
+                <Link to="/register" className="btn btn-primary">
+                  立即注册
+                </Link> 
+                < /div>
             } 
                 < ul className = "nav navbar-nav" >
                     < li >

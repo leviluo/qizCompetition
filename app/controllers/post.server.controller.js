@@ -44,14 +44,17 @@ module.exports = {
     },
     register: function(req, res, next) {
 
+
+
         if (!req.body.phone || !req.body.password || !req.body.identification) {
             return res.json({ 'id': -13, 'msg': '缺少参数' });
         };
 
         req.models.userinfo.findOne({ identitycard: req.body.identification }, function(err, docs) {
                 if (err) {next(err)};
-                
+                    console.log("000000")
                 if (docs) {
+                    console.log("111111")
                     return res.json({ 'id': -12, 'msg': '身份证号重复' });
                 } else {
                     superagent.post(config.MainAddr + '/managerapi/getReservedAccount')
@@ -60,7 +63,6 @@ module.exports = {
                                 return next(err)
                             }
                             if (ress.ok) {
-                 
                                 if (!ress.body.account) {
                                     return res.json({ id: '-2', msg: "没有可用账户" })
                                 }
@@ -116,15 +118,17 @@ module.exports = {
         
         superagent.post(config.preliminaryContestAddr + '/qiasapi/queryFundDetailLast')
             .type("form")
-            .send({ orderType: 2, pageIndex: 1, positive: 1,flag: 0 }).end(function(err, ress) {
+            .send({ orderType: 3, pageIndex: 1, positive: 0,flag: 0 }).end(function(err, ress) {
+                // console.log(err)
                 if (err) {
                     return next(err)
                 }
                 if (ress.ok) {
+                    // console.log(ress.body)
                     if (ress.body.data) {  
                     return res.json(ress.body.data)
                     }else{
-                    return res.json({ 'id': -12, 'msg': '没有数据' }); 
+                    return res.json(ress.body); 
                     }
                 };
             })
@@ -132,8 +136,8 @@ module.exports = {
 
     intermediaryContestData: function(req, res, next) {
         superagent.post(config.intermediaryContestAddr + '/qiasapi/queryFundDetailLast')
-            .type("form")
-            .send({ orderType: 2, pageIndex: 1, positive: 1,flag: 1 }).end(function(err, ress) {
+        .type("form")
+        .send({ orderType: 3, pageIndex: 1, positive: 0,flag: 1 }).end(function(err, ress) {
                 if (err) {
                     return next(err)
                 }
@@ -141,7 +145,7 @@ module.exports = {
                     if (ress.body.data) {  
                     return res.json(ress.body.data)
                     }else{
-                    return res.json({ 'id': -12, 'msg': '没有数据' }); 
+                    return res.json(ress.body); 
                     }
                 };
             })
@@ -220,17 +224,6 @@ module.exports = {
             if (!reqq.user || reqq.role != 0) {
                 return res.json({ "id": "-10", "msg": "用户不合法" });
             }
-            // req.models.user.findOne({ userid: reqq.user }, function(err, docs) {
-                // if (err) {
-                    // return next(err)
-                // }
-                // if (docs) {
-                    // req.body.user = reqq.user;
-                    // next();
-                // } else {
-                    // return res.json({ "id": "-10", "msg": "不存在此用户" });
-                // }
-            // })
 			req.body.user = reqq.user;
 			next();
         } else {
@@ -242,7 +235,6 @@ module.exports = {
         var bearerHeader = req.headers["authorization"];
         if (bearerHeader) {
             reqq = jwt.decode(bearerHeader, config.JWT_SECRET);
-            // console.log(req.models)
             req.models.user.findOne({ userid: reqq.user, role: 1 }, function(err, docs) {
                 if (err) {
                     return next(err)
@@ -260,9 +252,6 @@ module.exports = {
     },
 
     ModifyPass: function(req, res, next) {
-        // req.models.user.findOne({ phone: req.body.user,password:req.body.oldpassword }, function(err, docs) {
-        // if (err) {return next(err)}
-        // if (docs) {
         superagent.get(config.MainAddr + '/managerapi/checkSystemTradingStatus').end(function(err, ress) {
                 if (err) {
                     return next(err)
@@ -280,7 +269,7 @@ module.exports = {
                             if (err) {
                                 return next(err)
                             }
-                            console.log(resss.body)
+                            // console.log(resss.body)
                             if (resss.ok) {
                                 if (resss.body.id == 0) {
                                     return res.json({ id: 0, msg: "修改成功" });
@@ -291,14 +280,10 @@ module.exports = {
                         })
                 };
             })
-            // }else{
-            //     return res.json({ "id": "-1", "msg": "旧密码错误" });
-            // }
-            // })
     },
 
     Article: function(req, res, next) {
-        console.log(req.body)
+        // console.log(req.body)
         if (req.body.articletype == undefined || !req.body.title || !req.body.type || !req.body.content) {
             return res.json({ 'id': -13, 'msg': '缺少参数' });
         };
@@ -357,16 +342,9 @@ module.exports = {
     },
 
     memberInfoList:function(req,res,next){
-        req.models.userinfo.find({ sort: 'id ASC'}).populate('userid').exec(function(err, docs) {
+        req.models.userinfo.query('select userinfo.*,user.userid,user.reg_time,referrer.referrerid from userinfo left join user on user.id = userinfo.userid left join referrer on referrer.recommendedid = user.userid order by user.id',[],function(err, docs) {
             if (err) { next(err) };
             if (docs) {
-                docs.map(function(item,index){
-                    var userid = item.userid.userid
-                    var reg_time = item.userid.reg_time
-                    item.userid = userid
-                    item.reg_time = reg_time
-                })
-            
                 res.json(docs)
             }
         })

@@ -13,14 +13,10 @@ export default class Tip extends Component {
 
     componentWillMount = () => {
         let that = this;
-        if (this.props.tipText.tipText.id == 0 ) {
-            var time = this.props.tipText.time || 2000
-        }else{
-            var time = 2000
-        }
+        
         setTimeout(function() {
             that.close();
-        }, time)
+        }, 2000)
 
         if (this.props.tipText.tipText.id == 0 && this.props.update) {
             this.props.update();

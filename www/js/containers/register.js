@@ -184,32 +184,20 @@ export default class Register extends Component {
 
   componentWillReceiveProps=(nextProps)=>{
     if (nextProps.registerResult.id==0) {
-
       this.setState({
-        openConfirms:this.state.openConfirms ? false :true,
+        openConfirms:true,
         ConfirmText:nextProps.registerResult.msg+this.state.time+"S后自动跳转个人中心,也可以确认立即跳转"
       })
       var _this = this
       this.setIntrl = setTimeout(function(){
         _this.confirm()
       },10000)
-      this.setIntrl1 = setInterval(function(){
-        console.log(_this.state.time)
-        if (_this.state.time<0) {clearInterval(this.setIntrl1)};
-        _this.setState({
-          time:_this.state.time - 1,
-        })
-      },1000)
     }else{
-      this.setState({
-        openConfirms:this.state.openConfirms ? false :true,
-        ConfirmText:nextProps.registerResult.message || nextProps.registerResult.msg
-      })
+      this.props.openTips(nextProps.registerResult.message || nextProps.registerResult.msg)
     }
   }
 
   confirm = ()=>{
-    console.log(this.state.openConfirms)
     this.setState({
       openConfirms:false
     })
@@ -219,16 +207,14 @@ export default class Register extends Component {
   }
 
   componentWillUnmount =()=>{
-     clearTimeout(this.setIntrl)
-     clearInterval(this.setIntrl1)
+     if(this.setIntrl)clearTimeout(this.setIntrl)
+     // clearInterval(this.setIntrl1)
   }
 
   render() {
-    // this.props.registerResult
-    console.log("what")
     return (
             <div style={{background:"white"}}>
-           <form style={{width:"600px",margin:"10px auto",padding:"30px 0"}}>
+           <div style={{width:"600px",margin:"10px auto",padding:"30px 0"}}>
               <h3 style={{textAlign:"center"}}>注册</h3>
               <InputBox header = '手机号' indeed={true} handleSelect = {this.phoneChange} />
               <InputBox header = '密码' indeed={true} handleSelect = {this.passwordChange} />
@@ -274,7 +260,7 @@ export default class Register extends Component {
         <button onClick={this.handleClick} className="btn btn-primary" style={{width:"100%"}}>
           提交
         </button>
-            </form>
+            </div>
            <Confirms confirm={this.confirm} ConfirmText={this.state.ConfirmText} open = {this.state.openConfirms} />
       </div>
     )

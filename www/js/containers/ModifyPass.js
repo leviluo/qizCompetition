@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import ModalBox from './components/Modal'
 import InputBox from './components/InputBox'
-import { operateDataQuote } from '../actions/fetchSecretQuote';
+import { operateDataQuote } from '../actions/fetchDataQuote';
 import { connect } from 'react-redux';
 
 @connect(

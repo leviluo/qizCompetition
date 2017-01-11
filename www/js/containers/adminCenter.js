@@ -31,6 +31,7 @@ const memberInfoHeader = [
     {key:"userid",value:"账户"},
     {key:"name",value:"姓名"},
     {key:"identitycard",value:"身份证"},
+    {key:"referrerid",value:"推荐人"},
     {key:"reg_time",value:"注册时间"}
 ]
 // @asyncConnect([{
@@ -242,16 +243,7 @@ export default class memberCenter extends Component{
         }
 
           render() {
-            console.log(this.props.memberInfoListData)
             const styles = require('./adminCenter.scss')
-            // const items =[
-            //     {account:"1111",profits:"100",days:"5"},
-            //     {account:"2222",profits:"100",days:"5"},
-            //     {account:"1111",profits:"100",days:"5"},
-            //     {account:"1111",profits:"100",days:"5"},
-            //     {account:"1111",profits:"100",days:"5"},
-            //     {account:"1111",profits:"100",days:"5"}
-            // ]
             return <div>
             <ul className={styles.rightul}>
                 <li><a name="ulNav" onClick={(e)=>this.changeViews(e,'memberDegree')}>会员等级管理</a></li>

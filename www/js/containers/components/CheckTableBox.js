@@ -56,10 +56,6 @@ export default class CheckTableBox extends Component{
             })
         }
 
-        deleteMulti = (e) =>{
-          console.log(this.state.chooseItems)
-        }
-
         setStyle = (directive,id) =>{
           if (directive=='on') {
             var color = '#efefef'
@@ -88,7 +84,7 @@ export default class CheckTableBox extends Component{
         }
 
         chooseMulti =(e,id)=>{
-            console.log(id)
+            // console.log(id)
           var items = this.state.chooseItems;
           if (!e.target.checked) {
             e.target.parentNode.parentNode.style.background = '#fff'
@@ -112,8 +108,12 @@ export default class CheckTableBox extends Component{
         chooseAll = (e)=>{
           if(e.target.checked){
             this.setStyle('on')
+            var ar = []
+            for (var i = 0; i < Math.min(this.state.averagenum,this.props.data.length); i++) {
+                ar.push(i)
+            };
             this.setState({
-              chooseItems:[0,1,2,3,4,5,6,7,8,9]
+              chooseItems:ar
             })
           }else{
             this.setStyle('off')

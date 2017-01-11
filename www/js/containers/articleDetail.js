@@ -15,6 +15,7 @@ export default class Home extends Component{
 
     componentWillMount = () => {
         let id = this.props.params.id;
+
         this.props.articleDetailDataQuote('/public/articleDetailData',{id:id})
         if(!this.props.articleDetailData.updatedAt)return
     }
@@ -34,6 +35,7 @@ export default class Home extends Component{
       }else{
         var type = "规则"
       }
+       // console.log(this.props)
     return ( < div style={{background:"#fff"}}>
           <ol className="breadcrumb">
             <li><IndexLink to="/">主页</IndexLink></li>

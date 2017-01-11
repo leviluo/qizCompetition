@@ -90,10 +90,13 @@ const requireUser = (nextState, replace, next) => {
     replace({ pathname: '/login' })
     next()
 }
+
 import { ReduxAsyncConnect, asyncConnect, reducer as reduxAsyncConnect } from 'redux-async-connect'
+import Index from '../containers/Index'
+
 const Routers = (
   <Router history={hashHistory} render={(props) => <ReduxAsyncConnect {...props}/>}>
-    <Route path="/" getComponent={getIndex}>
+    <Route path="/" component={Index}>
       <IndexRoute getComponent={getHome}/>
       <Route path="/home" getComponent={getHome}/>
       <Route path="/fundDetails/:type" getComponent={getfundDetails}/>

@@ -98,8 +98,7 @@ export function registerQuote(url,body) {
   return {
       endpoint: url,
       types: [register_REQUEST, register_SUCCESS, register_FAILURE],
-      body:body,
-      time:10000
+      body:body
     }
 }
 

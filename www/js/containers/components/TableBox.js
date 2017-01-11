@@ -77,7 +77,7 @@ export default class TableBox extends Component{
                             continue
                         };
                          if (this.props.tableHeader[j].key == 'title') {
-                            array.push(<td key = {j} ><Link to={`/articleDetail/${this.props.data[i].id}`} >{this.props.data[i].title}</Link></td>)
+                            array.push(<td key = {j} ><Link to={`/articleDetail/${this.props.data[i].id}`} query={{type: 'Original'}}>{this.props.data[i].title}</Link></td>)
                             continue
                          }
                          if (this.props.tableHeader[j].key == 'updatedAt' || this.props.tableHeader[j].key == 'reg_time' ) {
@@ -87,6 +87,14 @@ export default class TableBox extends Component{
                          if (this.props.tableHeader[j].key == '14') {
                             if (this.props.data[i][this.props.tableHeader[j].key]) {
                             array.push(<td key = {j} >{ (parseFloat(this.props.data[i][this.props.tableHeader[j].key])*100).toFixed(2) + '%'}</td>)
+                            }else{
+                            array.push(<td key = {j} ></td>)
+                            }
+                            continue
+                         }
+                         if (this.props.tableHeader[j].key == '11') {
+                            if (this.props.data[i][this.props.tableHeader[j].key]) {
+                            array.push(<td key = {j} >{ (parseFloat(this.props.data[i][this.props.tableHeader[j].key])).toFixed(2)}</td>)
                             }else{
                             array.push(<td key = {j} ></td>)
                             }
